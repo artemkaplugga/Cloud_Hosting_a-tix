@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aëtix - Личный кабинет</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles/cabinet.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="left-section">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="Images/logo.svg" alt="Aëtix Logo">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <div class="nav-group">
+                        <div class="nav-item-dropdown">
+                            <div class="dropdown-toggle" tabindex="0">
+                                <span>услуги</span>
+                                <svg class="arrow-down" width="10" height="6" viewBox="0 0 10 6">
+                                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                </svg>
+                            </div>
+                            <div class="dropdown-menu" id="services-menu">
+                                <a href="tarifs.html" class="dropdown-link">
+                                    <img src="Images/cloudhosting.png" alt="icon" class="dropdown-icon">
+                                    Виртуальные серверы
+                                </a>
+                                <a href="high_cpu.html" class="dropdown-link">
+                                    <img src="Images/cloudhosting.png" alt="icon" class="dropdown-icon">
+                                    HIGH-CPU серверы
+                                </a>
+                                <a href="dedicated-servers.html" class="dropdown-link">
+                                    <img src="Images/cloudhosting.png" alt="icon" class="dropdown-icon">
+                                    Выделенные серверы
+                                </a>
+                                <a href="storage_vps.html" class="dropdown-link">
+                                    <img src="Images/cloudhosting.png" alt="icon" class="dropdown-icon">
+                                    storage VPS
+                                </a>
+                            </div>
+                        </div>
+                        <div class="nav-item">
+                            <a href="/contact.html" class="nav-link">информация</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="brand">
+                <h1 class="brand-title">
+                    <span class="visible-letter">a</span><span class="hidden-letters">
+                        <span class="letter">ë</span>
+                        <span class="letter">t</span>
+                        <span class="letter">i</span>
+                        <span class="letter">x</span>
+                    </span>
+                </h1>
+            </div>
+            <div class="auth-links">
+                <a href="index.html" class="user-menu-item logout-item" id="logoutBtn">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                    </svg>
+                    Выйти
+                </a>
+                <div class="user-profile" id="userProfile">
+                    <div class="user-avatar" id="userAvatar">
+                        <!-- Инициалы пользователя будут добавлены через JavaScript -->
+                    </div>
+                    <div class="user-menu">
+                        <div class="user-menu-header">
+                            <div class="user-name"></div>
+                            <div class="user-email"></div>
+                        </div>
+                        <div class="user-menu-items">
+                            <a href="cabinet.html" class="user-menu-item">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                                Личный кабинет
+                            </a>
+                            <a href="#" class="user-menu-item logout-item" id="logoutBtn">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                                </svg>
+                                Выйти
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <!-- Мобильное меню -->
+        <div class="mobile-menu">
+            <nav class="mobile-nav">
+                <div class="mobile-nav-group">
+                    <div class="mobile-nav-item">
+                        <div class="mobile-dropdown-toggle">
+                            <span>услуги</span>
+                            <svg class="arrow-down" width="10" height="6" viewBox="0 0 10 6">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </div>
+                        <div class="mobile-dropdown-menu">
+                            <a href="tarifs.html" class="mobile-dropdown-link">
+                                <img src="Images/cloudhosting.png" alt="icon" class="dropdown-icon">
+                                Виртуальные серверы
+                            </a>
+                            <a href="high_cpu.html" class="mobile-dropdown-link">
+                                <img src="Images/cloudhosting.png" alt="icon" class="dropdown-icon">
+                                HIGH-CPU серверы
+                            </a>
+                            <a href="dedicated-servers.html" class="mobile-dropdown-link">
+                                <img src="Images/cloudhosting.png" alt="icon" class="dropdown-icon">
+                                Выделенные серверы
+                            </a>
+                            <a href="storage_vps.html" class="mobile-dropdown-link">
+                                <img src="Images/cloudhosting.png" alt="icon" class="dropdown-icon">
+                                storage VPS
+                            </a>
+                        </div>
+                    </div>
+                    <a href="/contact.html" class="mobile-nav-link">информация</a>
+                </div>
+            </nav>
+            <div class="mobile-auth-buttons">
+                <a href="index.html" class="mobile-logout-btn" id="mobileLogoutBtn">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                    </svg>
+                    Выйти
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="cabinet-header">
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <div class="user-details">
+                    <h2>Иван Иванов</h2>
+                    <p>ivan@example.com</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cabinet-grid">
+            <div class="cabinet-sidebar">
+                <div class="sidebar-menu">
+                    <a href="#services" class="menu-item active" data-tab="services">
+                        <span class="menu-icon">🖥️</span>
+                        <span>Управление услугами</span>
+                    </a>
+                    <a href="#orders" class="menu-item" data-tab="orders">
+                        <span class="menu-icon">📋</span>
+                        <span>История заказов</span>
+                    </a>
+                    <a href="#payments" class="menu-item" data-tab="payments">
+                        <span class="menu-icon">💳</span>
+                        <span>История платежей</span>
+                    </a>
+                    <a href="#support" class="menu-item" data-tab="support">
+                        <span class="menu-icon">❓</span>
+                        <span>Техподдержка</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="cabinet-content">
+                <!-- Вкладка управления услугами -->
+                <div class="tab-content active" id="services">
+                    <div class="services-section">
+                        <h2 class="gradient-heading">Мои услуги</h2>
+                        <div class="services-list">
+                            <div class="service-card2">
+                                <div class="service-header">
+                                    <h3 class="gradient-heading">VDS Сервер #1</h3>
+                                    <span class="status active">Активен</span>
+                                </div>
+                                <div class="service-info">
+                                    <p>CPU: 4 ядра</p>
+                                    <p>RAM: 8 GB</p>
+                                    <p>SSD: 120 GB</p>
+                                    <p>IP: 192.168.1.1</p>
+                                </div>
+                                <div class="service-actions">
+                                    <button class="btn btn-primary">Управление</button>
+                                    <button class="btn btn-secondary">Продлить</button>
+                                </div>
+                            </div>
+                            <div class="service-card2">
+                                <div class="service-header">
+                                    <h3 class="gradient-heading">High-CPU Сервер #1</h3>
+                                    <span class="status active">Активен</span>
+                                </div>
+                                <div class="service-info">
+                                    <p>CPU: 8 ядер</p>
+                                    <p>RAM: 16 GB</p>
+                                    <p>SSD: 240 GB</p>
+                                    <p>IP: 192.168.1.2</p>
+                                </div>
+                                <div class="service-actions">
+                                    <button class="btn btn-primary">Управление</button>
+                                    <button class="btn btn-secondary">Продлить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Вкладка истории заказов -->
+                <div class="tab-content" id="orders">
+                    <div class="orders-section">
+                        <h2 class="gradient-heading">История заказов</h2>
+                        <div class="orders-list">
+                            <div class="order-card">
+                                <div class="order-header">
+                                    <h3 class="gradient-heading">Заказ #12345</h3>
+                                    <span class="status completed">Выполнен</span>
+                                </div>
+                                <div class="order-info">
+                                    <p>Дата: 15.03.2024</p>
+                                    <p>VDS Сервер Standard</p>
+                                    <p>Сумма: 2500 ₽</p>
+                                </div>
+                                <div class="order-actions">
+                                    <button class="btn btn-secondary">Подробнее</button>
+                                </div>
+                            </div>
+                            <div class="order-card">
+                                <div class="order-header">
+                                    <h3 class="gradient-heading">Заказ #12344</h3>
+                                    <span class="status completed">Выполнен</span>
+                                </div>
+                                <div class="order-info">
+                                    <p>Дата: 10.03.2024</p>
+                                    <p>High-CPU Сервер Pro</p>
+                                    <p>Сумма: 5000 ₽</p>
+                                </div>
+                                <div class="order-actions">
+                                    <button class="btn btn-secondary">Подробнее</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Вкладка истории платежей -->
+                <div class="tab-content" id="payments">
+                    <div class="payments-section">
+                        <h2 class="gradient-heading">История платежей</h2>
+                        <div class="payments-list">
+                            <div class="payment-card">
+                                <div class="payment-header">
+                                    <h3 class="gradient-heading">Платёж #67890</h3>
+                                    <span class="status success">Успешно</span>
+                                </div>
+                                <div class="payment-info">
+                                    <p>Дата: 15.03.2024</p>
+                                    <p>Способ: Банковская карта</p>
+                                    <p>Сумма: 2500 ₽</p>
+                                </div>
+                                <div class="payment-actions">
+                                    <button class="btn btn-secondary">Квитанция</button>
+                                </div>
+                            </div>
+                            <div class="payment-card">
+                                <div class="payment-header">
+                                    <h3 class="gradient-heading">Платёж #67889</h3>
+                                    <span class="status success">Успешно</span>
+                                </div>
+                                <div class="payment-info">
+                                    <p>Дата: 10.03.2024</p>
+                                    <p>Способ: PayPal</p>
+                                    <p>Сумма: 5000 ₽</p>
+                                </div>
+                                <div class="payment-actions">
+                                    <button class="btn btn-secondary">Квитанция</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Вкладка техподдержки -->
+                <div class="tab-content" id="support">
+                    <div class="support-section">
+                        <h2 class="gradient-heading">Техническая поддержка</h2>
+                        <div class="support-card">
+                            <div class="support-info">
+                                <h3 class="gradient-heading">Обращения в поддержку</h3>
+                                <div class="ticket-list">
+                                    <div class="ticket">
+                                        <div class="ticket-header">
+                                            <h4 class="gradient-heading">Тикет #34567</h4>
+                                            <span class="status open">Открыт</span>
+                                        </div>
+                                        <p>Проблема с подключением к серверу</p>
+                                        <p class="ticket-date">Создан: 15.03.2024</p>
+                                    </div>
+                                    <div class="ticket">
+                                        <div class="ticket-header">
+                                            <h4 class="gradient-heading">Тикет #34566</h4>
+                                            <span class="status closed">Закрыт</span>
+                                        </div>
+                                        <p>Вопрос по оплате</p>
+                                        <p class="ticket-date">Создан: 10.03.2024</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary">Создать обращение</button>
+                            </div>
+                            <div class="support-contacts">
+                                <h3 class="gradient-heading">Контакты поддержки</h3>
+                                <ul>
+                                    <li>Email: support@aetix.com</li>
+                                    <li>Телефон: 8-800-123-45-67</li>
+                                    <li>Telegram: @aetix_support</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/cabinet.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/header.js"></script>
+</body>
+</html>

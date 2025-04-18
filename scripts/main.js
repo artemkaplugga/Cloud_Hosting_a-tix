@@ -1,6 +1,18 @@
 // Swiper initialization code will go here 
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Header scroll effect
+    const header = document.querySelector('.header');
+    if (header) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 0) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
+
     // Добавление параллакс-эффекта для баннера
     const bannerSection = document.querySelector('.banner');
     const bannerImage = document.querySelector('.banner-image img');
@@ -192,64 +204,191 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initial check on page load
     handleScroll();
 
-    // Add hover effect for swiper
-    const swiperContainer = document.querySelector('.swiper');
-    if (swiperContainer) {
-        swiperContainer.addEventListener('mouseenter', function() {
-            this.classList.add('hovered');
-        });
-        
-        swiperContainer.addEventListener('mouseleave', function() {
-            this.classList.remove('hovered');
-        });
-    }
-
-    // Create clouds animation
-    const cloudsContainer = document.getElementById('clouds-container');
+    // Модальные окна
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+    const closeButtons = document.querySelectorAll('.modal-close');
     
-    if (cloudsContainer) {
-        for (let i = 0; i < 8; i++) {
-            createCloud();
+    // Открытие модальных окон
+    loginBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        loginModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+
+    registerBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        registerModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Закрытие модальных окон
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'none';
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Закрытие при клике вне модального окна
+    window.addEventListener('click', function(e) {
+        if (e.target === loginModal) {
+            loginModal.style.display = 'none';
+            document.body.style.overflow = '';
         }
-    }
-    
-    function createCloud() {
-        const cloud = document.createElement('div');
-        cloud.className = 'cloud';
-        
-        // Set random size, position and speed
-        const size = Math.random() * 150 + 50; // between 50px and 200px
-        const posX = Math.random() * 100; // between 0% and 100%
-        const posY = Math.random() * 70; // between 0% and 70%
-        const speedFactor = Math.random() * 30 + 30; // between 30s and 60s
-        
-        cloud.style.width = size + 'px';
-        cloud.style.height = size / 3 + 'px';
-        cloud.style.left = posX + '%';
-        cloud.style.top = posY + '%';
-        cloud.style.opacity = Math.random() * 0.4 + 0.1; // between 0.1 and 0.5
-        cloud.style.animation = `float ${speedFactor}s linear infinite`;
-        cloud.style.animationDelay = `-${Math.random() * speedFactor}s`; // Random start point in the animation
-        
-        cloudsContainer.appendChild(cloud);
+        if (e.target === registerModal) {
+            registerModal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Показать/скрыть пароль
+    const showPasswordToggles = document.querySelectorAll('input[type="checkbox"]');
+    showPasswordToggles.forEach(toggle => {
+        toggle.addEventListener('change', function() {
+            const passwordInput = this.closest('.form-group').querySelector('input[type="password"]');
+            passwordInput.type = this.checked ? 'text' : 'password';
+        });
+    });
+
+    // Управление авторизацией и профилем пользователя
+    const authLinks = document.querySelector('.auth-links');
+    const userProfile = document.getElementById('userProfile');
+    const userAvatar = document.getElementById('userAvatar');
+    const userMenuHeader = document.querySelector('.user-menu-header');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Функция для получения инициалов из имени
+    function getInitials(name) {
+        return name
+            .split(' ')
+            .map(word => word[0])
+            .join('')
+            .toUpperCase();
     }
 
-    // Dropdown for 'услуги'
-    const dropdownNav = document.querySelector('.nav-item-dropdown');
-    if (dropdownNav) {
-        dropdownNav.addEventListener('click', function(e) {
-            e.stopPropagation();
-            this.classList.toggle('open');
+    // Функция для сброса UI в состояние "не авторизован"
+    function resetUIToLoggedOut() {
+        // Показываем кнопки входа/регистрации
+        if (loginBtn) loginBtn.style.display = 'inline';
+        if (document.querySelector('.auth-separator')) document.querySelector('.auth-separator').style.display = 'inline';
+        if (registerBtn) registerBtn.style.display = 'inline';
+        // Скрываем профиль
+        if (userProfile) userProfile.style.display = 'none';
+    }
+
+    // Функция для обновления UI после входа
+    function updateUIAfterLogin(userData) {
+        // Скрываем кнопки входа/регистрации
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (document.querySelector('.auth-separator')) document.querySelector('.auth-separator').style.display = 'none';
+        if (registerBtn) registerBtn.style.display = 'none';
+
+        // Показываем профиль
+        if (userProfile) userProfile.style.display = 'block';
+        
+        // Устанавливаем инициалы в аватар
+        if (userAvatar) userAvatar.textContent = getInitials(userData.username);
+        
+        // Обновляем информацию в меню
+        if (userMenuHeader) {
+            userMenuHeader.querySelector('.user-name').textContent = userData.username;
+            userMenuHeader.querySelector('.user-email').textContent = userData.email;
+        }
+
+        // Сохраняем данные пользователя
+        localStorage.setItem('user', JSON.stringify(userData));
+    }
+
+    // Функция для выхода
+    function logout() {
+        localStorage.removeItem('user');
+        // Немедленно обновляем UI (хотя это не повлияет после редиректа)
+        resetUIToLoggedOut(); 
+        window.location.href = 'index.html';
+    }
+
+    // Проверяем, есть ли сохраненный пользователь при загрузке страницы
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+        try {
+            const parsedUser = JSON.parse(savedUser);
+            updateUIAfterLogin(parsedUser);
+        } catch (error) {
+            console.error("Ошибка парсинга сохраненных данных пользователя:", error);
+            localStorage.removeItem('user'); // Очищаем поврежденные данные
+            resetUIToLoggedOut(); // Явно сбрасываем UI
+        }
+    } else {
+        resetUIToLoggedOut(); // Явно сбрасываем UI, если пользователя нет
+    }
+
+    // Обработка отправки форм
+    const forms = document.querySelectorAll('.modal-form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Собираем данные формы
+            const formData = new FormData(form);
+            const userData = {
+                username: formData.get('studentId') || formData.get('regStudentId'),
+                email: formData.get('regEmail') || 'user@example.com',
+                password: formData.get('password') || formData.get('regPassword')
+            };
+
+            // Здесь должен быть запрос к серверу
+            // Имитируем успешную авторизацию
+            updateUIAfterLogin(userData);
+
+            // Закрываем модальное окно
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'none';
+            document.body.style.overflow = '';
         });
-        document.addEventListener('click', function(e) {
-            dropdownNav.classList.remove('open');
+    });
+
+    // Обработка клика по аватару
+    userAvatar.addEventListener('click', function(e) {
+        const userMenu = this.nextElementSibling;
+        userMenu.classList.toggle('active');
+        e.stopPropagation();
+    });
+
+    // Закрытие меню при клике вне его
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.user-menu') && !e.target.closest('.user-avatar')) {
+            document.querySelector('.user-menu').classList.remove('active');
+        }
+    });
+
+    // Обработка выхода
+    if (logoutBtn) { // Убедимся, что кнопка выхода есть на странице
+        logoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            logout();
         });
-        // Чтобы клик по меню не закрывал его
-        const dropdownMenu = dropdownNav.querySelector('.dropdown-menu');
-        if (dropdownMenu) {
-            dropdownMenu.addEventListener('click', function(e) {
-                e.stopPropagation();
+    }
+
+      // FAQ functionality
+      document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const faqItem = question.parentElement;
+            const isActive = faqItem.classList.contains('active');
+
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
             });
-        }
-    }
+
+            // Toggle the clicked item
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        });
+    });
+
 }); 

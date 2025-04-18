@@ -17,6 +17,7 @@ body {
     box-sizing: border-box;
     position: relative;
     padding: 0 80px;
+    margin-top: 115px;
 }
 
 .hero-section {
@@ -248,8 +249,8 @@ body {
 .plan-header {
     margin-bottom: 20px;
 }
-.plan-name {
-    font-size: 20px;
+.plan-name2 {
+    font-size: 16px;
     font-weight: 700;
     color: #222;
     margin-bottom: 10px;
@@ -257,13 +258,14 @@ body {
 }
 .plan-specs {
     display: flex;
+    margin-top: 10px;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
     color: #555;
     font-size: 15px;
     font-weight: 500;
 }
-.plan-price {
+.plan-price2 {
     text-align: center;
     margin-top: 30px;
 }
@@ -279,14 +281,15 @@ body {
     font-weight: 500;
     color: #38BDF8;
 }
-.price-per-month {
-    font-size: 15px;
+.price-per-month2 {
+    font-size: 22px;
     color: #333;
-    font-weight: 500;
+    font-weight: 800;
 }
-.price-per-month span {
+.price-per-month2 span {
     font-size: 14px;
     color: #38BDF8;
+    font-weight: 500;
 }
 
 .tariff-notice {
@@ -526,7 +529,7 @@ body {
 }
 
 .footer {
-    
+    width: calc(100% + 160px);
     margin: 0 -80px;
     padding: 60px 80px 30px;
     font-family: 'Play', sans-serif;
